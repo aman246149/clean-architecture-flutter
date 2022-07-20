@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/mediaqueries/mediaqueries.dart';
 
 class HomePageq extends StatefulWidget {
-  HomePageq({Key? key}) : super(key: key);
+  const HomePageq({Key? key}) : super(key: key);
 
   @override
   State<HomePageq> createState() => _HomePageqState();
@@ -51,14 +51,14 @@ class _HomePageqState extends State<HomePageq> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Accessories",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
                 ),
-                Container(
+                SizedBox(
                   height: 40,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -70,20 +70,19 @@ class _HomePageqState extends State<HomePageq> {
                               onTap: () {
                                 controller.animateToPage(index,
                                     curve: Curves.decelerate,
-                                    duration: Duration(milliseconds: 300));
+                                    duration:
+                                        const Duration(milliseconds: 300));
                               },
                               child: Text(
                                 categories[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey),
                               ),
                             ));
                       }),
                 ),
-                Container(
-                  width: getsize(context).width,
-                  height: getsize(context).height,
+                Expanded(
                   child: PageView.builder(
                     pageSnapping: true,
                     controller: controller,
@@ -93,10 +92,10 @@ class _HomePageqState extends State<HomePageq> {
                       return GridView.builder(
                           itemCount: 10,
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, crossAxisSpacing: 10),
                           itemBuilder: (context, index) {
-                            return CustomCard();
+                            return const CustomCard();
                           });
                     },
                   ),

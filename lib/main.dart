@@ -3,12 +3,11 @@ import 'package:ecommerce/features/auth/presentation/pages/signup_page.dart';
 import 'package:ecommerce/features/homePage/presentation/bloc/home_bloc.dart';
 import 'package:ecommerce/features/homePage/presentation/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'injection_container.dart' as di;
-import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,10 +15,11 @@ void main() async {
   await di.init();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(
-      create: (context) => AuthBloc(loginUseCase: sl(), signupUseCase: sl()),
+      create: (context) =>
+          AuthBloc(loginUseCase: di.sl(), signupUseCase: di.sl()),
     ),
     BlocProvider(
-      create: (context) => HomeBloc(usecase: sl())..add(FetchDataEvent()),
+      create: (context) => HomeBloc(usecase: di.sl())..add(FetchDataEvent()),
     ),
   ], child: const MyApp()));
 }
@@ -39,15 +39,15 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const SignUp();
-            }
+            // if (!snapshot.hasData) {
+            //   return const SignUp();
+            // }
 
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
 
             return HomePageq();
           }),
