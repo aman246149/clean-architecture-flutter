@@ -40,7 +40,8 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkDataSource>(
       () => NetworksDataSourceImpl(auth: sl(), firestore: sl()));
 
-  sl.registerLazySingleton<FetchData>(() => FetchDataImpl(firestore: sl(), auth: sl()));
+  sl.registerLazySingleton<FetchData>(
+      () => FetchDataImpl(firestore: sl(), auth: sl()));
 
   //! core
 

@@ -9,7 +9,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      color: Color.fromARGB(255, 249, 247, 247),
+      color: const Color.fromARGB(255, 249, 247, 247),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -18,7 +18,7 @@ class CustomCard extends StatelessWidget {
             Container(
               height: 100,
               width: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
@@ -26,14 +26,14 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
-            Text("AccerNitro 5"),
-            SizedBox(
+            const Text("AccerNitro 5"),
+            const SizedBox(
               height: 5,
             ),
-            Text("\$599"),
+            const Text("\$599"),
           ],
         ),
       ),
