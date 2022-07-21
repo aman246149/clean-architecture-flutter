@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/categories/categories.dart';
 import 'package:ecommerce/features/homePage/presentation/bloc/home_bloc.dart';
+import 'package:ecommerce/features/homePage/presentation/pages/details_product.dart';
 import 'package:ecommerce/features/homePage/presentation/widgets/customcard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,7 +96,12 @@ class _HomePageqState extends State<HomePageq> {
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, crossAxisSpacing: 10),
                           itemBuilder: (context, index) {
-                            return const CustomCard();
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder:(context) => ProductDetails()));
+                                },
+                                child: const CustomCard());
                           });
                     },
                   ),
