@@ -14,6 +14,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<AddCartEvent>((event, emit) async {
       emit(CartLoadingState());
       final res = await repository.addCartData(event.data);
+
+      print("**********");
+      print(event.data.title);
       res.fold((left) => emit(CartErrorState(errorMsg: left.message)),
           (right) => emit(CartSuccessState(cartList: right)));
     });
@@ -30,12 +33,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final res = await repository.getCartData();
       res.fold((left) => emit(CartErrorState(errorMsg: left.message)),
           (right) => emit(CartSuccessState(cartList: right)));
-    });
-
-    on<GetTotalPrice>((event, emit) async {
-      final res = await repository.totalPrice();
-      res.fold((left) => emit(CartErrorState(errorMsg: left.message)),
-          (right) => emit(CartTotalPrice(totalPrice: right)));
     });
   }
 }

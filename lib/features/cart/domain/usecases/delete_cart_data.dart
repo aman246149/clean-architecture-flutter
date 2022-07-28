@@ -8,7 +8,7 @@ class DeleteCartDate {
 
   DeleteCartDate({required this.repository});
 
-  Future<Either<CustomError, List<CartModel>>> deleteCardData(int index) async {
+  Future<Either<CustomError, Map<String,dynamic>>> deleteCardData(int index) async {
     return await repository.deleteCartData(index);
   }
 }

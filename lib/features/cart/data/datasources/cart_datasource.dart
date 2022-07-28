@@ -2,38 +2,45 @@ import 'package:ecommerce/features/cart/data/models/cart_data_model.dart';
 import 'package:ecommerce/features/cart/domain/entity/cart_model.dart';
 
 abstract class CartDataSource {
-  Future<List<CartModel>> addDataToCart(CartModel data);
-  Future<List<CartModel>> deleteDataToCart(int index);
-  Future<List<CartModel>> getDataToCart();
-  Future<double> totalprice();
+  Future<Map<String, dynamic>> addDataToCart(CartModel data);
+  Future<Map<String, dynamic>> deleteDataToCart(int index);
+  Future<Map<String, dynamic>> getDataToCart();
 }
 
 class CartDataSourceImpl implements CartDataSource {
   List<CartModel> cartList = [];
+
   @override
-  Future<List<CartModel>> addDataToCart(CartModel data) {
+  Future<Map<String, dynamic>> addDataToCart(CartModel data) {
     cartList.add(data);
-    return Future.value(cartList);
+    double totalPrice = 0.0;
+    totalPrice = totalmoney();
+    print("^^^^^^");
+    print(data.title);
+    return Future.value({"cartList": cartList, "totalprice": totalPrice});
   }
 
   @override
-  Future<List<CartModel>> deleteDataToCart(int index) {
+  Future<Map<String, dynamic>> deleteDataToCart(int index) {
     cartList.removeAt(index);
-    return Future.value(cartList);
+    double totalPrice = 0.0;
+    totalPrice = totalmoney();
+    return Future.value({"cartList": cartList, "totalprice": totalPrice});
   }
 
   @override
-  Future<List<CartModel>> getDataToCart() {
-    return Future.value(cartList);
+  Future<Map<String, dynamic>> getDataToCart() {
+    double totalPrice = 0.0;
+    totalPrice = totalmoney();
+    return Future.value({"cartList": cartList, "totalprice": totalPrice});
   }
 
-  @override
-  Future<double> totalprice() {
+  double totalmoney() {
     double price = 0.0;
     for (var element in cartList) {
       price += element.price;
     }
 
-    return Future.value(price);
+    return price;
   }
 }

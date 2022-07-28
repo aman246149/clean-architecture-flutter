@@ -22,7 +22,6 @@ class Cart extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-       
 
           if (state is CartSuccessState) {
             return Stack(
@@ -60,7 +59,7 @@ class Cart extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "Total ${state.cartList.length == 0 ? 0 : price}",
+                        "Total ${state.cartList["totalprice"]}",
                         style: TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 25),
                       ),
@@ -87,7 +86,7 @@ class Cart extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                    child: state.cartList.length == 0
+                    child: state.cartList["cartList"].length == 0
                         ? Center(
                             child: Text(
                               "No Element In the Cart",
@@ -96,7 +95,7 @@ class Cart extends StatelessWidget {
                             ),
                           )
                         : ListView.builder(
-                            itemCount: state.cartList.length,
+                            itemCount: state.cartList["cartList"].length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(28.0),
@@ -113,7 +112,8 @@ class Cart extends StatelessWidget {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20))),
                                             child: Image.network(
-                                              state.cartList[index].imageUrl
+                                              state.cartList["cartList"][index]
+                                                  .imageUrl
                                                   .toString(),
                                               fit: BoxFit.cover,
                                             ),
@@ -129,9 +129,10 @@ class Cart extends StatelessWidget {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    state.cartList[index].title
-                                                        .toString()
-                                                        .split(" ")[0],
+                                                    state
+                                                        .cartList["cartList"]
+                                                            [index]
+                                                        .title,
                                                     style: TextStyle(
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -165,7 +166,7 @@ class Cart extends StatelessWidget {
                                                     ],
                                                   ),
                                                   Text(
-                                                      "${state.cartList[index].price} Rs",
+                                                      "${state.cartList["cartList"][index].price} Rs",
                                                       style: TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:

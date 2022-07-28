@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/mediaqueries/mediaqueries.dart';
 import 'package:ecommerce/features/cart/domain/entity/cart_model.dart';
-import 'package:ecommerce/features/cart/domain/usecases/totalprice_usecase.dart';
+
 import 'package:ecommerce/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:ecommerce/features/cart/presentation/pages/cartpage.dart';
 import 'package:ecommerce/features/homePage/presentation/widgets/circularcolor.dart';
@@ -28,6 +28,7 @@ class ProductDetails extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    print(productName);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -116,6 +117,7 @@ class ProductDetails extends StatelessWidget {
                               imageUrl: productImageUrl,
                               price: productPrice,
                               productId: "123");
+                          print(data.title);
                           BlocProvider.of<CartBloc>(context)
                               .add(AddCartEvent(data: data));
 

@@ -9,7 +9,7 @@ class AddCartData {
 
   AddCartData({required this.repository});
 
-  Future<Either<CustomError, List<CartModel>>> addCardData(CartModel data) async {
+  Future<Either<CustomError, Map<String,dynamic>>> addCardData(CartModel data) async {
     return await repository.addCartData(data);
   }
 }

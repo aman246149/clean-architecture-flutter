@@ -8,7 +8,7 @@ class GetCartData {
 
   GetCartData({required this.repository});
 
-  Future<Either<CustomError, List<CartModel>>> getCardData() async {
+  Future<Either<CustomError, Map<String,dynamic>>> getCardData() async {
     return await repository.getCartData();
   }
 }

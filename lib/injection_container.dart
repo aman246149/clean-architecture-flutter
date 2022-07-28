@@ -10,7 +10,6 @@ import 'package:ecommerce/features/cart/data/repository/cart_domain_repository.d
 import 'package:ecommerce/features/cart/domain/repository/cart_repository.dart';
 import 'package:ecommerce/features/cart/domain/usecases/delete_cart_data.dart';
 import 'package:ecommerce/features/cart/domain/usecases/get_cart_data.dart';
-import 'package:ecommerce/features/cart/domain/usecases/totalprice_usecase.dart';
 import 'package:ecommerce/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:ecommerce/features/homePage/data/datasources/productfetchonline.dart';
 import 'package:ecommerce/features/homePage/domain/repositories/home_page_repository.dart';
@@ -39,7 +38,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddCartData(repository: sl()));
   sl.registerLazySingleton(() => DeleteCartDate(repository: sl()));
   sl.registerLazySingleton(() => GetCartData(repository: sl()));
-  sl.registerLazySingleton(() => TotalPrice(repository: sl()));
+  // sl.registerLazySingleton(() => TotalPrice(repository: sl()));
 
   //! repository
 

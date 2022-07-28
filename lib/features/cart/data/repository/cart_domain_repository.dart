@@ -10,7 +10,7 @@ class CartDomainRepository implements CartRepository {
   CartDomainRepository({required this.cartDataSource});
 
   @override
-  Future<Either<CustomError, List<CartModel>>> addCartData(
+  Future<Either<CustomError, Map<String,dynamic>>> addCartData(
       CartModel data) async {
     try {
       return Right(await cartDataSource.addDataToCart(data));
@@ -20,7 +20,7 @@ class CartDomainRepository implements CartRepository {
   }
 
   @override
-  Future<Either<CustomError, List<CartModel>>> deleteCartData(int index) async {
+  Future<Either<CustomError, Map<String,dynamic>>> deleteCartData(int index) async {
     try {
       return Right(await cartDataSource.deleteDataToCart(index));
     } catch (e) {
@@ -29,7 +29,7 @@ class CartDomainRepository implements CartRepository {
   }
 
   @override
-  Future<Either<CustomError, List<CartModel>>> getCartData() async {
+  Future<Either<CustomError, Map<String,dynamic>>> getCartData() async {
     try {
       return Right(await cartDataSource.getDataToCart());
     } catch (e) {
@@ -37,12 +37,7 @@ class CartDomainRepository implements CartRepository {
     }
   }
   
-  @override
-  Future<Either<CustomError, double>> totalPrice() async{
-    try {
-      return Right(await cartDataSource.totalprice());
-    } catch (e) {
-      return Left(CustomError(message: e.toString()));
-    }
-  }
+
+  
+
 }

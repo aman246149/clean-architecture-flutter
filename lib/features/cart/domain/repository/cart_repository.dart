@@ -3,9 +3,9 @@ import 'package:ecommerce/features/cart/domain/entity/cart_model.dart';
 import 'package:either_dart/either.dart';
 
 abstract class CartRepository {
-  Future<Either<CustomError, List<CartModel>>> getCartData();
-  Future<Either<CustomError, List<CartModel>>> addCartData(CartModel data);
-  Future<Either<CustomError, List<CartModel>>> deleteCartData(int index);
-  Future<Either<CustomError, double>> totalPrice();
+  Future<Either<CustomError,Map<String,dynamic>>> getCartData();
+  Future<Either<CustomError,Map<String,dynamic>>> addCartData(CartModel data);
+  Future<Either<CustomError,Map<String,dynamic>>> deleteCartData(int index);
+
 
 }

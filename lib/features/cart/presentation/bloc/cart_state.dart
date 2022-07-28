@@ -14,14 +14,9 @@ class CartErrorState extends CartState {
 }
 
 class CartSuccessState extends CartState {
-  final List<CartModel> cartList;
+  final Map<String,dynamic> cartList;
 
   CartSuccessState({required this.cartList});
 }
 
-class CartTotalPrice extends CartState {
-  final double totalPrice;
 
-  CartTotalPrice({required this.totalPrice});
-
-}
