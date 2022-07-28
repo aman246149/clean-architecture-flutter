@@ -9,13 +9,13 @@ import '../datasources/productfetchonline.dart';
 
 class DataProductRepositoryImpl extends HomePageRepository {
   final FetchData fetchData;
-
+  
   DataProductRepositoryImpl({required this.fetchData});
 
   @override
-  Future<Either<CustomError, List<productModel>>> fetchProduct() async {
+  Future<Either<CustomError, List<productModel>>> fetchProduct(documentname) async {
     try {
-      final listOfProducts = await fetchData.fetchOnlineProducts();
+      final listOfProducts = await fetchData.fetchOnlineProducts(documentname);
       return Right(listOfProducts);
     } catch (e) {
       return Left(CustomError(message: e.toString()));

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ecommerce/core/categories/categories.dart';
 import 'package:ecommerce/features/homePage/domain/entities/product_model.dart';
 import 'package:ecommerce/features/homePage/domain/usecases/fetch_product_usecase.dart';
 import 'package:meta/meta.dart';
@@ -10,12 +11,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final FetchProductsOnlineUsecase usecase;
 
   HomeBloc({required this.usecase}) : super(HomeInitial()) {
-    on<HomeEvent>((event, emit) {
-    });
+    on<HomeEvent>((event, emit) {});
 
     on<FetchDataEvent>((event, emit) async {
       emit(HomeLoadingState());
-      final response = await usecase.fetchProductUsecaseMethod();
+      final response =
+          await usecase.fetchProductUsecaseMethod(event.documentname);
+
+      response.fold((left) {
+        emit(HomeErrorState(error: left.message));
+      }, (right) => emit(HomeSuccessState(products: right)));
+    });
+
+    on<ChangeState>((event, emit) async {
+      emit(HomeLoadingState());
+      final response =
+          await usecase.fetchProductUsecaseMethod(categories[event.index]);
 
       response.fold((left) {
         emit(HomeErrorState(error: left.message));

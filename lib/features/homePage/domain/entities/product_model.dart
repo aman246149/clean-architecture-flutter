@@ -6,12 +6,13 @@ class productModel {
   final String productId;
   final Timestamp productDateAdded;
   final String productImageUrl;
+  final String productDescription;
 
   productModel( 
       {required this.productPrice,
       required this.productName,
       required this.productId,
       required this.productDateAdded,
-      required this.productImageUrl
-      });
+      required this.productImageUrl,
+      required this.productDescription});
 }

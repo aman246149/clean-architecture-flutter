@@ -24,7 +24,6 @@ class _HomePageqState extends State<HomePageq> {
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           print(state);
-          // TODO: implement listener
         },
         builder: (context, state) {
           if (state is HomeErrorState) {
@@ -44,19 +43,18 @@ class _HomePageqState extends State<HomePageq> {
               children: [
                 Container(
                   height: getsize(context).height / 3,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                          "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"),
+                      image: NetworkImage(state.products[0].productImageUrl),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  "Accessories",
+                Text(
+                  categories[pagevalue],
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
                 ),
                 SizedBox(
@@ -69,6 +67,9 @@ class _HomePageqState extends State<HomePageq> {
                             padding: const EdgeInsets.all(10.0),
                             child: InkWell(
                               onTap: () {
+                                pagevalue = index;
+                                BlocProvider.of<HomeBloc>(context)
+                                    .add(ChangeState(index));
                                 controller.animateToPage(index,
                                     curve: Curves.decelerate,
                                     duration:
@@ -91,17 +92,40 @@ class _HomePageqState extends State<HomePageq> {
                     itemCount: categories.length,
                     itemBuilder: (context, index) {
                       return GridView.builder(
-                          itemCount: 10,
+                          itemCount: state.products.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, crossAxisSpacing: 10),
                           itemBuilder: (context, index) {
                             return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder:(context) => ProductDetails()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProductDetails(
+                                                productPrice: state
+                                                    .products[index]
+                                                    .productPrice,
+                                                productName: state
+                                                    .products[index]
+                                                    .productName,
+                                                productImageUrl: state
+                                                    .products[index]
+                                                    .productImageUrl,
+                                                productDescription:
+                                                    state.products[index].productDescription,
+                                                category: categories[index],
+                                                productId: state.products[index].productId,
+                                              )));
                                 },
-                                child: const CustomCard());
+                                child: CustomCard(
+                                  productName:
+                                      state.products[index].productName,
+                                  productPrice:
+                                      state.products[index].productPrice,
+                                  imageurl:
+                                      state.products[index].productImageUrl,
+                                ));
                           });
                     },
                   ),

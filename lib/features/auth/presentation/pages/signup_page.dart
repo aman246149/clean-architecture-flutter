@@ -30,6 +30,7 @@ class _SignUpState extends State<SignUp> {
           listener: (context, state) {
             if (state is AuthSuccess) {
               print(state.data);
+              
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>  HomePageq()));
             }

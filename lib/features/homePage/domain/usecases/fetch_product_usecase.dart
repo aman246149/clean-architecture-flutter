@@ -11,7 +11,7 @@ class FetchProductsOnlineUsecase {
   FetchProductsOnlineUsecase({required this.repository});
 
   Future<Either<CustomError, List<productModel>>>
-      fetchProductUsecaseMethod() async {
-    return await repository.fetchProduct();
+      fetchProductUsecaseMethod(String documentname) async {
+    return await repository.fetchProduct(documentname);
   }
 }

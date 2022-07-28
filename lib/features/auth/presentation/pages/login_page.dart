@@ -1,6 +1,9 @@
+import 'package:ecommerce/core/categories/categories.dart';
 import 'package:ecommerce/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce/features/auth/presentation/pages/signup_page.dart';
+import 'package:ecommerce/features/homePage/presentation/bloc/home_bloc.dart';
 import 'package:ecommerce/features/homePage/presentation/pages/homepage.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,8 +31,9 @@ class _LogInState extends State<LogIn> {
           listener: (context, state) {
             if (state is AuthSuccess) {
               print(state.data);
+
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  HomePageq()));
+                  MaterialPageRoute(builder: (context) => HomePageq()));
             }
           },
           builder: (context, state) {

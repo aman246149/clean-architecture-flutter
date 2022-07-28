@@ -7,7 +7,8 @@ class ProductModelData extends productModel {
       required super.productName,
       required super.productId,
       required super.productDateAdded,
-      required super.productImageUrl
+      required super.productImageUrl,
+      required super.productDescription,
       });
 
   factory ProductModelData.fromMap(QueryDocumentSnapshot<Map<String, dynamic>> map) {
@@ -16,7 +17,8 @@ class ProductModelData extends productModel {
         productName: map["productName"],
         productId: map["productId"],
         productDateAdded: map["productDateAdded"],
-        productImageUrl:map["productImageUrl"]
+        productImageUrl:map["productImageUrl"],
+        productDescription:map["productDescription"]
         );
   }
 
@@ -26,7 +28,8 @@ class ProductModelData extends productModel {
       "productName": productName,
       "productId": productId,
       "productDateAdded": productDateAdded,
-      "productImageUrl":productImageUrl
+      "productImageUrl":productImageUrl,
+      "productDescription":productDescription
     };
   }
 }

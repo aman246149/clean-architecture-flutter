@@ -3,7 +3,15 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key? key}) : super(key: key);
+  final String productName;
+  final double productPrice;
+  final String imageurl;
+  const CustomCard(
+      {Key? key,
+      required this.productName,
+      required this.productPrice,
+      required this.imageurl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +26,21 @@ class CustomCard extends StatelessWidget {
             Container(
               height: 100,
               width: 150,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(
-                      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"),
+                  image: NetworkImage(imageurl),
                 ),
               ),
             ),
             const SizedBox(
               height: 5,
             ),
-            const Text("AccerNitro 5"),
+            Text(productName),
             const SizedBox(
               height: 5,
             ),
-            const Text("\$599"),
+            Text("\$ ${productPrice.toString()}"),
           ],
         ),
       ),

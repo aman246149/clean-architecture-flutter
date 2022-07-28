@@ -1,5 +1,7 @@
+import 'package:ecommerce/core/categories/categories.dart';
 import 'package:ecommerce/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce/features/auth/presentation/pages/signup_page.dart';
+import 'package:ecommerce/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:ecommerce/features/homePage/presentation/bloc/home_bloc.dart';
 import 'package:ecommerce/features/homePage/presentation/pages/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +21,11 @@ void main() async {
           AuthBloc(loginUseCase: di.sl(), signupUseCase: di.sl()),
     ),
     BlocProvider(
-      create: (context) => HomeBloc(usecase: di.sl())..add(FetchDataEvent()),
+      create: (context) => HomeBloc(usecase: di.sl())
+        ..add(FetchDataEvent(documentname: categories[0])),
+    ),
+      BlocProvider(
+      create: (context) => CartBloc(repository: di.sl()),
     ),
   ], child: const MyApp()));
 }

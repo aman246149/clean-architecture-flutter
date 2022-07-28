@@ -1,22 +1,33 @@
 import 'package:ecommerce/core/mediaqueries/mediaqueries.dart';
-import 'package:ecommerce/features/homePage/presentation/pages/cartpage.dart';
+import 'package:ecommerce/features/cart/domain/entity/cart_model.dart';
+import 'package:ecommerce/features/cart/domain/usecases/totalprice_usecase.dart';
+import 'package:ecommerce/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:ecommerce/features/cart/presentation/pages/cartpage.dart';
 import 'package:ecommerce/features/homePage/presentation/widgets/circularcolor.dart';
 import 'package:ecommerce/features/homePage/presentation/widgets/ratingstar.dart';
 import 'package:ecommerce/features/homePage/presentation/widgets/sizecontainer.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductDetails extends StatelessWidget {
+  final String productDescription;
+  final double productPrice;
+  final String productName;
+  final String productImageUrl;
+  final String category;
+  final String productId;
+
+  const ProductDetails({
+    super.key,
+    required this.productDescription,
+    required this.productPrice,
+    required this.productName,
+    required this.productImageUrl,
+    required this.category,
+    required this.productId,
+  });
   @override
   Widget build(BuildContext context) {
-    var id = 1;
-    var title = "laptop";
-    var price = 2000;
-    var description = "best laptop in the world";
-    var category = "electronics";
-    var image =
-        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-    var rating = 5;
-
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -27,7 +38,7 @@ class ProductDetails extends StatelessWidget {
                 color: Colors.yellow,
                 child: Center(
                   child: Image.network(
-                    image,
+                    productImageUrl,
                     fit: BoxFit.cover,
                   ),
                 )),
@@ -49,7 +60,7 @@ class ProductDetails extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              title,
+                              productName,
                               overflow: TextOverflow.clip,
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.w800),
@@ -73,7 +84,7 @@ class ProductDetails extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        "Price : ${price} Rs",
+                        "Price : ${productPrice.toString()} Rs",
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.w600),
                       ),
@@ -89,7 +100,7 @@ class ProductDetails extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        description,
+                        productDescription,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -98,6 +109,16 @@ class ProductDetails extends StatelessWidget {
                       ),
                       RaisedButton(
                         onPressed: () {
+                          CartModel data = CartModel(
+                              title: productName,
+                              category: "electronics",
+                              description: productDescription,
+                              imageUrl: productImageUrl,
+                              price: productPrice,
+                              productId: "123");
+                          BlocProvider.of<CartBloc>(context)
+                              .add(AddCartEvent(data: data));
+
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => Cart()));
                         },
